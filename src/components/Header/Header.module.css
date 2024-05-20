@@ -27,8 +27,8 @@
   align-items: center;
   gap: 10px;
   border-radius: 40px;
-  border: 1px solid #378760;
-  color: #378760;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
   background-color: white;
   font-size: 14px;
 }

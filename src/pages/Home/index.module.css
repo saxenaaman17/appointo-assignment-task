@@ -1,0 +1,100 @@
+.homeContainer {
+  width: 920px;
+}
+
+.contentContainer {
+  display: flex;
+  margin-top: 100px;
+  gap: 40px;
+}
+
+.calendarContainer {
+  background-color: #ebebf0;
+  padding: 40px;
+}
+
+.title {
+  color: #28293d;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.timezone {
+  color: #555770;
+  font-size: 14px;
+}
+
+.timezoneLabel {
+  font-weight: 600;
+}
+
+.calendar {
+  font-family: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  border-radius: 10px;
+  border-color: #c7c9d9;
+  width: 400px;
+  padding: 0 10px;
+  margin-top: 20px;
+}
+
+:global(.react-calendar__navigation__label) {
+  color: #333333;
+  font-size: 18px;
+}
+
+:global(.react-calendar__month-view__weekdays__weekday) {
+  color: var(--primary-color);
+}
+
+:global(.react-calendar__tile--now) {
+  background-color: white;
+}
+
+:global(.react-calendar__tile--now:hover) {
+  background-color: #e6e6e6 !important;
+}
+
+:global(.react-calendar__month-view__days__day--weekend) {
+  color: black;
+}
+
+:global(.react-calendar__tile) {
+  flex-basis: 20% !important;
+}
+
+:global(.react-calendar__tile--active) {
+  background-color: var(--primary-color);
+  border-radius: 100px;
+  color: white;
+}
+
+:global(.react-calendar__tile--active:hover) {
+  background-color: var(--primary-color-light) !important;
+  border-radius: 100px !important;
+}
+
+:global(.react-calendar__tile--active:focus) {
+  background-color: var(--primary-color-light) !important;
+  border-radius: 100px !important;
+}
+
+.actionsContainer {
+  height: 80px;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.companyLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.companyLabel a {
+  color: white;
+}
