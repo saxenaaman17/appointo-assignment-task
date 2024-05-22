@@ -144,3 +144,7 @@
   border: 1px solid var(--primary-color);
   cursor: pointer;
 }
+
+.nextButton:hover {
+  background-color: #EAF0F1;
+}
