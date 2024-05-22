@@ -1,4 +1,4 @@
-import Calendar from "react-calendar";
+import Calendar, { OnArgs } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import styles from "./index.module.css";
@@ -8,15 +8,23 @@ import { useFetchTimeSlotsQuery } from "../../apis/api";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../reducers/store";
 import {
+  setActiveStartDate,
   setAppointmentDate,
   setAppointmentSlot,
   Value,
 } from "../../reducers/homeReducer";
-import { formatDate, formatTime } from "../../utils/general-utils";
+import {
+  formatDate,
+  formatTime,
+  getNextMonthFirstDate,
+} from "../../utils/general-utils";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const activeStartDate = useSelector(
+    (state: AppState) => state.home.activeStartDate
+  );
   const appointmentDate = useSelector(
     (state: AppState) => state.home.appointmentDate
   );
@@ -26,22 +34,28 @@ const Home = () => {
 
   const { data, isFetching } = useFetchTimeSlotsQuery(
     {
-      startDate: formatDate(appointmentDate),
-      endDate:
-        appointmentDate && !Array.isArray(appointmentDate)
-          ? formatDate(
-              new Date(appointmentDate.getTime() + 24 * 60 * 60 * 1000)
-            )
-          : "",
+      startDate: formatDate(activeStartDate),
+      endDate: formatDate(getNextMonthFirstDate(activeStartDate!)),
     },
     {
-      skip: !appointmentDate,
+      skip: !activeStartDate,
       refetchOnMountOrArgChange: 30,
     }
   );
 
   const handleDateChange = (value: Value) => {
     dispatch(setAppointmentDate({ appointmentDate: value }));
+  };
+
+  // this function will be executed when user changes the month using forward and backward arrows
+  // when we set activeStartDate here, mock slots api is called to fetch next month's slots
+  const handleActiveStartDateChange = ({ _, activeStartDate }: OnArgs) => {
+    dispatch(
+      setActiveStartDate({
+        activeStartDate: activeStartDate,
+      })
+    );
+    dispatch(setAppointmentDate({ appointmentDate: activeStartDate }));
   };
 
   const handleSlotClick = (value: string) => {
@@ -66,6 +80,8 @@ const Home = () => {
             minDate={new Date()}
             prev2Label={null}
             next2Label={null}
+            showNeighboringMonth={false}
+            onActiveStartDateChange={handleActiveStartDateChange}
           />
         </div>
 
@@ -79,21 +95,28 @@ const Home = () => {
           <div className={styles.slotContainer}>
             {isFetching ? (
               <span>Fetching slots information...</span>
-            ) : data && data?.length > 0 ? (
-              data?.[0].slots?.map((slot) => {
-                const starTime = formatTime(slot.start_time);
-                const endTime = formatTime(slot.end_time);
-                const value = `${starTime} - ${endTime}`;
-                return (
-                  <Slot
-                    key={starTime}
-                    value={value}
-                    onClick={(value) => handleSlotClick(value)}
-                    isSelected={appointmentSlot === value}
-                  />
-                );
-              })
-            ) : null}
+            ) : data && data?.length > 0 && appointmentDate ? (
+              data
+                .filter(
+                  (singleDate) =>
+                    singleDate.date === formatDate(appointmentDate)
+                )?.[0]
+                ?.slots?.map((slot) => {
+                  const starTime = formatTime(slot.start_time);
+                  const endTime = formatTime(slot.end_time);
+                  const value = `${starTime} - ${endTime}`;
+                  return (
+                    <Slot
+                      key={starTime}
+                      value={value}
+                      onClick={(value) => handleSlotClick(value)}
+                      isSelected={appointmentSlot === value}
+                    />
+                  );
+                })
+            ) : (
+              <span>No slots available...</span>
+            )}
           </div>
         </div>
       </div>

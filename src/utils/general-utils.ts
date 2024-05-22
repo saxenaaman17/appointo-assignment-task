@@ -27,3 +27,18 @@ export const formatTime = (datewithTime: string): string => {
 
   return `${formattedHours}:${formattedMinutes} ${amOrPm}`;
 };
+
+export const getNextMonthFirstDate = (activeStartDate: Date): Date => {
+  const year = activeStartDate.getFullYear();
+  const month = activeStartDate.getMonth();
+
+  // get next month's first date
+  const nextMonthFirstDate = new Date(year, month + 1, 1);
+
+  // make sure December to January transition works fine
+  if (nextMonthFirstDate.getMonth() !== (month + 1) % 12) {
+    nextMonthFirstDate.setFullYear(year + 1);
+  }
+
+  return nextMonthFirstDate;
+}

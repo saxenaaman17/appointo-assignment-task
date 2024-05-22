@@ -5,19 +5,27 @@ type ValuePiece = Date | null;
 export type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export type HomeState = {
+  activeStartDate: ValuePiece;
   appointmentDate: Value;
   appointmentSlot: string | null;
 };
 
 const initialState: HomeState = {
+  activeStartDate: new Date(),
   appointmentDate: new Date(),
   appointmentSlot: "",
 };
 
 export const homeSlice = createSlice({
-  name: "AUTH_MODULE",
+  name: "HOME_MODULE",
   initialState,
   reducers: {
+    setActiveStartDate: (
+      state: HomeState,
+      { payload: { activeStartDate } }
+    ) => {
+      state.activeStartDate = activeStartDate;
+    },
     setAppointmentDate: (
       state: HomeState,
       { payload: { appointmentDate } }
@@ -35,4 +43,5 @@ export const homeSlice = createSlice({
 
 export default homeSlice.reducer;
 
-export const { setAppointmentDate, setAppointmentSlot } = homeSlice.actions;
+export const { setActiveStartDate, setAppointmentDate, setAppointmentSlot } =
+  homeSlice.actions;

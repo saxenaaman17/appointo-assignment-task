@@ -34,7 +34,7 @@
   border-radius: 10px;
   border-color: #c7c9d9;
   width: 400px;
-  padding: 0 10px;
+  padding: 10px 10px;
   margin-top: 20px;
 }
 
@@ -60,13 +60,23 @@
 }
 
 :global(.react-calendar__tile) {
-  flex-basis: 20% !important;
+  /* flex-basis: 20% !important; */
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 :global(.react-calendar__tile--active) {
   background-color: var(--primary-color);
   border-radius: 100px;
   color: white;
+}
+
+:global(.react-calendar__tile:enabled:hover) {
+  border-radius: 100px !important;
+}
+
+:global(.react-calendar__tile:enabled:focus) {
+  border-radius: 100px !important;
 }
 
 :global(.react-calendar__tile--active:hover) {
@@ -113,7 +123,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: 380px;
+  max-height: 330px;
   overflow-y: scroll;
   padding-right: 20px;
 }
@@ -143,6 +153,7 @@
   border-radius: 10px;
   border: 1px solid var(--primary-color);
   cursor: pointer;
+  background-color: white;
 }
 
 .nextButton:hover {
