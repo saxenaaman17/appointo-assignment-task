@@ -13,6 +13,7 @@ import {
   Value,
 } from "../../reducers/homeReducer";
 import { formatDate, formatTime } from "../../utils/general-utils";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -60,8 +61,11 @@ const Home = () => {
           <Calendar
             className={styles.calendar}
             onChange={handleDateChange}
-            showWeekNumbers
+            showWeekNumbers={false}
             value={appointmentDate}
+            minDate={new Date()}
+            prev2Label={null}
+            next2Label={null}
           />
         </div>
 
@@ -104,6 +108,9 @@ const Home = () => {
             Appointo
           </a>
         </span>
+        <button className={styles.nextButton}>
+          Next <MdOutlineKeyboardArrowRight size={25} />
+        </button>
       </div>
     </div>
   );
