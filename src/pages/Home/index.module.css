@@ -101,3 +101,32 @@
 .companyLabel a {
   color: white;
 }
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 360px;
+}
+
+.slotContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 380px;
+  overflow-y: scroll;
+  padding-right: 20px;
+}
+
+.slotContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.slotContainer::-webkit-scrollbar-track {
+  background: white;
+}
+
+.slotContainer::-webkit-scrollbar-thumb {
+  background-color: #ebebf0;
+  border-radius: 8px;
+}
