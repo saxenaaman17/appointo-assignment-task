@@ -52,12 +52,22 @@ const Home = () => {
   // when we set activeStartDate here, mock slots api is called to fetch next month's slots
   const handleActiveStartDateChange = ({ action, activeStartDate }: OnArgs) => {
     console.log(action);
-    dispatch(
-      setActiveStartDate({
-        activeStartDate: activeStartDate,
-      })
-    );
-    dispatch(setAppointmentDate({ appointmentDate: activeStartDate }));
+    if (activeStartDate?.getMonth() === new Date().getMonth()) {
+      dispatch(
+        setActiveStartDate({
+          activeStartDate: new Date(),
+        })
+      );
+      dispatch(setAppointmentDate({ appointmentDate: new Date() }));
+    } else {
+      dispatch(
+        setActiveStartDate({
+          activeStartDate: activeStartDate,
+        })
+      );
+      dispatch(setAppointmentDate({ appointmentDate: activeStartDate }));
+    }
+    dispatch(setAppointmentSlot({ appointmentSlot: "" }));
   };
 
   const handleSlotClick = (value: string) => {
@@ -73,8 +83,8 @@ const Home = () => {
       <div className={styles.contentContainer}>
         {isError ? (
           <span style={{ marginBottom: "20px" }}>
-            Currently facing some issues in getting available slots information, It'll be
-            fixed soon.
+            Currently facing some issues in getting available slots information,
+            It'll be fixed soon.
           </span>
         ) : (
           <>
