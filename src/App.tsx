@@ -3,10 +3,12 @@ import AppLayout from "./layout/AppLayout";
 import Home from "./pages/Home";
 import { Provider } from "react-redux";
 import { store } from "./reducers/store";
+import ErrorPage from "./ErrorPage";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
