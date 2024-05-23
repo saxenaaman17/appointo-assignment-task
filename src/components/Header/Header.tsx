@@ -10,7 +10,12 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <img src="/logo.png" alt="company logo" aria-label="Company Name Logo" />
+      <img
+        src="https://assets-global.website-files.com/602f6e4385f3c15b5ee4238a/607955a9d5e3528558cc00e1_side_panda.png"
+        alt="company logo"
+        aria-label="Company Name Logo"
+        className={styles.companyLogo}
+      />
       <div className={styles.links}>
         <Link to="/contact-us" className={styles.showInLargeScreen}>
           Contact us
