@@ -50,7 +50,8 @@ const Home = () => {
 
   // this function will be executed when user changes the month using forward and backward arrows
   // when we set activeStartDate here, mock slots api is called to fetch next month's slots
-  const handleActiveStartDateChange = ({ _, activeStartDate }: OnArgs) => {
+  const handleActiveStartDateChange = ({ action, activeStartDate }: OnArgs) => {
+    console.log(action);
     dispatch(
       setActiveStartDate({
         activeStartDate: activeStartDate,
