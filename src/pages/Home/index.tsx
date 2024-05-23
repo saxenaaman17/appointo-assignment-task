@@ -39,12 +39,13 @@ const Home = () => {
     },
     {
       skip: !activeStartDate,
-      refetchOnMountOrArgChange: 30,
+      refetchOnMountOrArgChange: 20,
     }
   );
 
   const handleDateChange = (value: Value) => {
     dispatch(setAppointmentDate({ appointmentDate: value }));
+    dispatch(setAppointmentSlot({ appointmentSlot: "" }));
   };
 
   // this function will be executed when user changes the month using forward and backward arrows
@@ -81,6 +82,7 @@ const Home = () => {
             prev2Label={null}
             next2Label={null}
             showNeighboringMonth={false}
+            minDetail="month"
             onActiveStartDateChange={handleActiveStartDateChange}
           />
         </div>
@@ -109,7 +111,7 @@ const Home = () => {
                     <Slot
                       key={starTime}
                       value={value}
-                      onClick={(value) => handleSlotClick(value)}
+                      onClick={handleSlotClick}
                       isSelected={appointmentSlot === value}
                     />
                   );

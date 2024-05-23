@@ -89,6 +89,10 @@
   border-radius: 100px !important;
 }
 
+:global(.react-calendar__navigation button:disabled) {
+  background-color: white;
+}
+
 .actionsContainer {
   height: 80px;
   background-color: var(--primary-color);
