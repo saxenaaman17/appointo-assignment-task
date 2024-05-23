@@ -63,6 +63,10 @@ const Home = () => {
     dispatch(setAppointmentSlot({ appointmentSlot: value }));
   };
 
+  const handleNextButtonClick = () => {
+    console.log("next button clicked");
+  };
+
   return (
     <div className={styles.homeContainer}>
       <div className={styles.contentContainer}>
@@ -133,7 +137,7 @@ const Home = () => {
             Appointo
           </a>
         </span>
-        <button className={styles.nextButton}>
+        <button className={styles.nextButton} onClick={handleNextButtonClick}>
           Next <MdOutlineKeyboardArrowRight size={25} />
         </button>
       </div>

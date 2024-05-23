@@ -37,3 +37,27 @@
 .shareButton:hover {
   background-color: #EAF0F1;
 }
+
+.showInSmallScreen {
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .showInSmallScreen {
+    display: block;
+  }
+  .shareButton, .showInLargeScreen {
+    display: none;
+  }
+  .header {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .header img {
+    width: 180px;
+  }
+}

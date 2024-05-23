@@ -1,10 +1,11 @@
 .homeContainer {
   width: 920px;
+  background-color: white;
+  margin-top: 100px;
 }
 
 .contentContainer {
   display: flex;
-  margin-top: 100px;
   gap: 40px;
 }
 
@@ -121,6 +122,7 @@
   flex-direction: column;
   gap: 20px;
   width: 360px;
+  padding-top: 40px;
 }
 
 .slotContainer {
@@ -162,4 +164,40 @@
 
 .nextButton:hover {
   background-color: #EAF0F1;
+}
+
+@media (max-width: 1000px) {
+  .contentContainer {
+    flex-direction: column;
+  }
+  .homeContainer {
+    width: fit-content;
+    margin-top: 40px;
+  }
+  .buttonsContainer {
+    margin: auto;
+  }
+  .actionsContainer {
+    border-radius: 12px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 520px) {
+  .calendarContainer {
+    padding: 20px;
+  }
+  .calendar {
+    width: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .calendarContainer {
+    padding: 20px 10px;
+  }
+  .buttonsContainer {
+    width: 280px;
+  }
 }
