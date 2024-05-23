@@ -107,6 +107,10 @@
   border-bottom-right-radius: 12px;
 }
 
+.rounded {
+  border-radius: 12px;
+}
+
 .companyLabel {
   font-size: 12px;
   font-weight: 600;

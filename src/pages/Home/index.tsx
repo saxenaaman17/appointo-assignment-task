@@ -32,7 +32,7 @@ const Home = () => {
     (state: AppState) => state.home.appointmentSlot
   );
 
-  const { data, isFetching } = useFetchTimeSlotsQuery(
+  const { data, isFetching, isError } = useFetchTimeSlotsQuery(
     {
       startDate: formatDate(activeStartDate),
       endDate: formatDate(getNextMonthFirstDate(activeStartDate!)),
@@ -70,64 +70,77 @@ const Home = () => {
   return (
     <div className={styles.homeContainer}>
       <div className={styles.contentContainer}>
-        <div className={styles.calendarContainer}>
-          <span className={styles.title}>Test Service</span>
-          <div className={styles.timezone}>
-            <span className={styles.timezoneLabel}>Timezone: </span>
-            <span>Asia/Calcutta</span>
-          </div>
+        {isError ? (
+          <span style={{ marginBottom: "20px" }}>
+            Currently facing some issues in getting available slots information, It'll be
+            fixed soon.
+          </span>
+        ) : (
+          <>
+            <div className={styles.calendarContainer}>
+              <span className={styles.title}>Test Service</span>
+              <div className={styles.timezone}>
+                <span className={styles.timezoneLabel}>Timezone: </span>
+                <span>Asia/Calcutta</span>
+              </div>
 
-          <Calendar
-            className={styles.calendar}
-            onChange={handleDateChange}
-            showWeekNumbers={false}
-            value={appointmentDate}
-            minDate={new Date()}
-            prev2Label={null}
-            next2Label={null}
-            showNeighboringMonth={false}
-            minDetail="month"
-            onActiveStartDateChange={handleActiveStartDateChange}
-          />
-        </div>
+              <Calendar
+                className={styles.calendar}
+                onChange={handleDateChange}
+                showWeekNumbers={false}
+                value={appointmentDate}
+                minDate={new Date()}
+                prev2Label={null}
+                next2Label={null}
+                showNeighboringMonth={false}
+                minDetail="month"
+                onActiveStartDateChange={handleActiveStartDateChange}
+              />
+            </div>
 
-        <div className={styles.buttonsContainer}>
-          <Dropdown
-            label="Select from variants"
-            options={["20", "40", "60"]}
-            value="20"
-            onChange={(option) => console.log(option)}
-          />
-          <div className={styles.slotContainer}>
-            {isFetching ? (
-              <span>Fetching slots information...</span>
-            ) : data && data?.length > 0 && appointmentDate ? (
-              data
-                .filter(
-                  (singleDate) =>
-                    singleDate.date === formatDate(appointmentDate)
-                )?.[0]
-                ?.slots?.map((slot) => {
-                  const starTime = formatTime(slot.start_time);
-                  const endTime = formatTime(slot.end_time);
-                  const value = `${starTime} - ${endTime}`;
-                  return (
-                    <Slot
-                      key={starTime}
-                      value={value}
-                      onClick={handleSlotClick}
-                      isSelected={appointmentSlot === value}
-                    />
-                  );
-                })
-            ) : (
-              <span>No slots available...</span>
-            )}
-          </div>
-        </div>
+            <div className={styles.buttonsContainer}>
+              <Dropdown
+                label="Select from variants"
+                options={["20", "40", "60"]}
+                value="20"
+                onChange={(option) => console.log(option)}
+              />
+              <div className={styles.slotContainer}>
+                {isFetching ? (
+                  <span>Fetching slots information...</span>
+                ) : data && data?.length > 0 && appointmentDate ? (
+                  data
+                    .filter(
+                      (singleDate) =>
+                        singleDate.date === formatDate(appointmentDate)
+                    )?.[0]
+                    ?.slots?.map((slot) => {
+                      const starTime = formatTime(slot.start_time);
+                      const endTime = formatTime(slot.end_time);
+                      const value = `${starTime} - ${endTime}`;
+                      return (
+                        <Slot
+                          key={starTime}
+                          value={value}
+                          onClick={handleSlotClick}
+                          isSelected={appointmentSlot === value}
+                        />
+                      );
+                    })
+                ) : (
+                  <span>No slots available...</span>
+                )}
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
-      <div className={styles.actionsContainer}>
+      <div
+        className={`${styles.actionsContainer} ${
+          isError ? styles.rounded : ""
+        }`}
+      >
         <span className={styles.companyLabel}>
           Powered By{" "}
           <a
@@ -137,9 +150,11 @@ const Home = () => {
             Appointo
           </a>
         </span>
-        <button className={styles.nextButton} onClick={handleNextButtonClick}>
-          Next <MdOutlineKeyboardArrowRight size={25} />
-        </button>
+        {!isError && (
+          <button className={styles.nextButton} onClick={handleNextButtonClick}>
+            Next <MdOutlineKeyboardArrowRight size={25} />
+          </button>
+        )}
       </div>
     </div>
   );
