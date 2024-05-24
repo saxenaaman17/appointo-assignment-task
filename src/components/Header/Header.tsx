@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import { RiShareBoxFill } from "react-icons/ri";
 import { GrContactInfo } from "react-icons/gr";
+import Dropdown from "../Dropdown/Dropdown";
 
 const Header = () => {
   const handleShareLinkButtonClick = () => {
@@ -20,6 +21,11 @@ const Header = () => {
       </Link>
 
       <div className={styles.links}>
+        <Dropdown
+          options={["Profile", "Settings", "About"]}
+          onChange={(option) => console.log(option)}
+          placeholder="Menu"
+        />
         <Link to="/contact-us" className={styles.showInLargeScreen}>
           Contact us
         </Link>

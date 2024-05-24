@@ -115,6 +115,7 @@ const Home = () => {
                 options={["20", "40", "60"]}
                 value="20"
                 onChange={(option) => console.log(option)}
+                variant="outlined"
               />
               <div className={styles.slotContainer}>
                 {isFetching ? (

@@ -2,14 +2,25 @@ import { useEffect, useRef, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import styles from "./Dropdown.module.css";
 
+type Variant = "outlined" | "standard";
+
 interface DropdownProps {
-  label: string;
+  label?: string;
   options: string[];
   value?: string;
+  variant?: Variant;
+  placeholder?: string;
   onChange?: (selectedOption: string) => void;
 }
 
-const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
+const Dropdown = ({
+  label,
+  options,
+  variant,
+  placeholder,
+  value,
+  onChange,
+}: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(value || options[0]);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -49,16 +60,24 @@ const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
 
   return (
     <div className={styles.dropdownContainer} ref={dropdownRef}>
-      <label htmlFor="dropdown-input" className={styles.label}>
-        {label}
-      </label>
+      {variant === "outlined" && (
+        <label htmlFor="dropdown-input" className={styles.label}>
+          {label}
+        </label>
+      )}
       <div
         id="dropdown-input"
-        className={`${styles.dropdown} ${isOpen ? styles.open : ""}`}
+        className={`${styles.dropdown} ${isOpen ? styles.open : ""} ${
+          variant === "outlined" ? styles.outlined : ""
+        }`}
         onClick={toggleDropdown}
       >
-        <span className={styles.selectedOption}>{selectedOption}</span>
-        <i className="icon">
+        {placeholder ? (
+          <span className={styles.placeholderText}>{placeholder}</span>
+        ) : (
+          <span className={styles.selectedOption}>{selectedOption}</span>
+        )}
+        <i className={styles.icon}>
           <RiArrowDropDownLine />
         </i>
         {isOpen && (
