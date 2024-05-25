@@ -19,48 +19,6 @@ import {
   getNextMonthFirstDate,
 } from "../../utils/general-utils";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import Band, { BandProps } from "../../components/Band/Band";
-
-const leftSideBands: BandProps[] = [
-  {
-    id: 1,
-    height: 60,
-    width: 620,
-    alignment: "left",
-    backgroundColor: "#CCE7E0",
-  },
-  {
-    id: 2,
-    height: 60,
-    width: 420,
-    alignment: "left",
-    backgroundColor: "#EDF9F1",
-  },
-];
-
-const rightSideBands: BandProps[] = [
-  {
-    id: 1,
-    height: 60,
-    width: 420,
-    alignment: "right",
-    backgroundColor: "#378760",
-  },
-  {
-    id: 2,
-    height: 60,
-    width: 480,
-    alignment: "right",
-    backgroundColor: "#CCE7E0",
-  },
-  {
-    id: 3,
-    height: 60,
-    width: 360,
-    alignment: "right",
-    backgroundColor: "#EDF9F1",
-  },
-];
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -210,12 +168,6 @@ const Home = () => {
           </button>
         )}
       </div>
-      {leftSideBands.map((band) => (
-        <Band {...band} />
-      ))}
-      {rightSideBands.map((band) => (
-        <Band {...band} />
-      ))}
     </div>
   );
 };

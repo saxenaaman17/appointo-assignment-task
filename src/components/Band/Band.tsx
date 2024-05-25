@@ -1,26 +1,28 @@
 export interface BandProps {
-  id: number;
-  width: number;
-  height: number;
+  width: number | string;
+  height: number | string;
   alignment: string;
   backgroundColor: string;
+  top: number | string;
 }
 
-const Band = ({ id, width, height, alignment, backgroundColor }: BandProps) => {
+const Band = ({
+  width,
+  height,
+  alignment,
+  backgroundColor,
+  top,
+}: BandProps) => {
   return (
     <div
       style={{
-        width: `${width}px`,
-        height: `${height}px`,
+        width: typeof width === "string" ? width : `${width}px`,
+        height: typeof height === "string" ? height : `${height}px`,
         backgroundColor,
-        ...(alignment === "left" ? { left: 0 } : { right: 0 }),
-        transform: "rotate(-5deg)",
+        transform: "skew(-5deg, -5deg)",
         position: "absolute",
-        top: `${
-          alignment === "left"
-            ? `${732 + (id - 1) * height}px`
-            : `${509 + (id - 1) * height}px`
-        }`,
+        top: typeof top === "string" ? top : `${top}px`,
+        ...(alignment === "left" ? { left: 0 } : { right: 0 }),
       }}
     />
   );

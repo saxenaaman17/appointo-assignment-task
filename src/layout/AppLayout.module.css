@@ -11,4 +11,21 @@
   display: flex;
   justify-content: center;
   background-color: #fbfcfd;
+  position: relative;
+}
+
+.leftSideBandsContainer {
+  flex-grow: 1;
+}
+
+.rightSideBandsContainer {
+  position: relative;
+  flex-grow: 1;
+}
+
+@media (max-width: 1400px) {
+  .leftSideBandsContainer,
+  .rightSideBandsContainer {
+    display: none;
+  }
 }

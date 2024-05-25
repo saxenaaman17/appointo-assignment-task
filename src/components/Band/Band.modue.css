@@ -1,0 +1,8 @@
+.band::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%; /* Match the main div's height */
+  background-color: rgb(204, 231, 224);
+  transform: rotate(-5deg); 
+}
