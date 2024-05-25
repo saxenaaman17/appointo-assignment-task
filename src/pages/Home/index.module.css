@@ -195,6 +195,9 @@
   .calendar {
     width: auto;
   }
+  .homeContainer {
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 380px) {
